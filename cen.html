@@ -387,10 +387,10 @@
             <!-- Article 16 -->
             <article class="card">
                 <a href="https://cen.acs.org/business/consumer-products/labels-misrepresent-products-chemical-content/104/web/2026/08" target="_blank" class="image-link">
-                    <img src="https://s7d1.scene7.com/is/image/CENODS/News--Widespread-mislabeling-of-consumer-products---576350?$responsive$&qlt=90,0&resMode=sharp2&fmt=webp&op_sharpen=1" alt="Nanoprobe achieves sharper MRIs of the inner ear">
+                    <img src="https://s7d1.scene7.com/is/image/CENODS/News--Widespread-mislabeling-of-consumer-products---576350?$responsive$&qlt=90,0&resMode=sharp2&fmt=webp&op_sharpen=1" alt="Product labels may misrepresent what’s in the bottle">
                 </a>
                 <div class="meta">
-                    <span class="date">August 21, 2026</span>
+                    <span class="date">AUGUST 21, 2026</span>
                 </div>
                 <a href="pdfs/cen-story-15.pdf" target="_blank" class="text-link">
                     <h2>Product labels may misrepresent what’s in the bottle</h2>
@@ -401,7 +401,7 @@
             <!-- Article 17 -->
             <article class="card">
                 <a href="https://cen.acs.org/synthesis/reaction-mechanisms/organic-synthesis-cyclic-bicyclic/104/web/2026/09" target="_blank" class="image-link">
-                    <img src="https://s7d1.scene7.com/is/image/CENODS/News--either-or-method-makes-4--or-5-membered-rings---598252?$responsive$&qlt=90,0&resMode=sharp2&fmt=webp&op_sharpen=1" alt="Nanoprobe achieves sharper MRIs of the inner ear">
+                    <img src="https://s7d1.scene7.com/is/image/CENODS/News--either-or-method-makes-4--or-5-membered-rings---598252?$responsive$&qlt=90,0&resMode=sharp2&fmt=webp&op_sharpen=1" alt="Light-driven reaction overrides a 60-year-old rule of synthetic chemistry">
                 </a>
                 <div class="meta">
                     <span class="date">SEPTEMBER 3, 2026</span>
@@ -414,5 +414,41 @@
 
         </main>
     </div>
+
+    <!-- Automatic Chronological Sorting Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Select the container holding all the articles
+            const grid = document.querySelector('.article-grid');
+            
+            // 2. Select all the individual article cards and turn them into an Array
+            const cards = Array.from(grid.querySelectorAll('.card'));
+
+            // 3. Sort the array of cards
+            cards.sort((a, b) => {
+                // Extract the date text from each card
+                const dateStrA = a.querySelector('.date').textContent.trim();
+                const dateStrB = b.querySelector('.date').textContent.trim();
+
+                // Helper function to safely parse dates
+                const parseDate = (dateStr) => {
+                    const parsed = Date.parse(dateStr);
+                    // If the date is invalid (like "Add Date Manually"), assign it a value of 0 
+                    // This forces it to the very bottom of the descending list
+                    return isNaN(parsed) ? 0 : parsed;
+                };
+
+                const dateA = parseDate(dateStrA);
+                const dateB = parseDate(dateStrB);
+
+                // Sort in descending order (Newest first)
+                return dateB - dateA;
+            });
+
+            // 4. Append the sorted cards back into the grid container
+            // (Appending an existing element automatically moves it from its old position to the new one)
+            cards.forEach(card => grid.appendChild(card));
+        });
+    </script>
 </body>
 </html>
